@@ -1,22 +1,4 @@
-name: Build Firmware
-on: [push]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-          
-      - name: Install PlatformIO
-        run: pip install -U platformio
-      
-      - name: Show directory structure
-        run: ls -R  # Lệnh này giúp ta nhìn thấy file platformio.ini đang nằm ở folder nào
-
-      - name: Build Firmware
-        # Nếu file platformio.ini nằm trong folder 'firmware', ông sửa cái dấu chấm '.' thành tên folder đó
-        run: pio run -d .
+- name: Build Firmware
+        run: |
+          find . -name "platformio.ini" -exec dirname {} \; > project_dir.txt
+          pio run -d $(cat project_dir.txt)
