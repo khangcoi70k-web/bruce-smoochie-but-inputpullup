@@ -13,6 +13,10 @@ jobs:
           
       - name: Install PlatformIO
         run: pip install -U platformio
-        
+      
+      - name: Show directory structure
+        run: ls -R  # Lệnh này giúp ta nhìn thấy file platformio.ini đang nằm ở folder nào
+
       - name: Build Firmware
-        run: pio run
+        # Nếu file platformio.ini nằm trong folder 'firmware', ông sửa cái dấu chấm '.' thành tên folder đó
+        run: pio run -d .
